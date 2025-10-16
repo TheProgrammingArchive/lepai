@@ -60,9 +60,9 @@ public:
 int main() {
     FxParser p{};
 
-    auto root = (p.parse_pipeline("p > ~(r + (p * ~q))"));
+    auto root = (p.parse_pipeline("p > ~(r * (p + ~q + ~(z > e))"));
 
-    Evaluator evaluator {{{"p", true}, {"q", false}, {"r", true}}};
+    Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}};
 
     try {
         std::cout << evaluator.evaluate(root.get()) << std::endl;
@@ -73,7 +73,7 @@ int main() {
 
     std::cout << compute_height(root.get());
 
-    auto newr = cnf_pipeline(std::move(root));
+    auto newr = cnf_pipeline((root));
 
-    print_infix(*newr);
+    print_infix(*root.get());
 }

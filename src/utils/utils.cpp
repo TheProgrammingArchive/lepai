@@ -46,3 +46,8 @@ int compute_height(Node* root) {
 void print_infix(const Node& root) {
     std::cout << root;
 }
+
+bool validity_check(Node* root) {
+
+}
+

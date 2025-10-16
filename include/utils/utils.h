@@ -22,4 +22,6 @@ int compute_height(Node* root);
 
 void print_infix(const Node& root);
 
+bool validity_check(Node* root);
+
 #endif //LEPAI_UTILS_H
