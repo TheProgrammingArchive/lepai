@@ -18,11 +18,11 @@ struct Node {
 };
 
 struct OperatorNode : Node {
-    std::unique_ptr<Node> left;
-    std::unique_ptr<Node> right;
+    std::shared_ptr<Node> left;
+    std::shared_ptr<Node> right;
     tok_type type;
 
-    OperatorNode(std::unique_ptr<Node> left = nullptr, tok_type type = {}, std::unique_ptr<Node> right = nullptr);
+    OperatorNode(std::shared_ptr<Node> left = nullptr, tok_type type = {}, std::shared_ptr<Node> right = nullptr);
     ~OperatorNode() override;
 
     std::ostream& print(std::ostream& out) const override;

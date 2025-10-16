@@ -6,14 +6,14 @@
 #define LEPAI_CONVERTERS_H
 #include "include/parser/node.h"
 
-std::unique_ptr<Node> impl_free(std::unique_ptr<Node> curr);
+std::shared_ptr<Node> impl_free(std::shared_ptr<Node> curr);
 
-std::unique_ptr<Node> nnf(std::unique_ptr<Node> curr);
+std::shared_ptr<Node> nnf(std::shared_ptr<Node> curr);
 
-std::unique_ptr<Node> cnf(std::unique_ptr<Node> curr);
+std::shared_ptr<Node> cnf(std::shared_ptr<Node> curr);
 
-std::unique_ptr<Node> distr(std::unique_ptr<Node> n1, std::unique_ptr<Node> n2);
+std::shared_ptr<Node> distr(std::shared_ptr<Node> n1, std::shared_ptr<Node> n2);
 
-std::unique_ptr<Node> cnf_pipeline(std::unique_ptr<Node> root);
+std::shared_ptr<Node> cnf_pipeline(std::shared_ptr<Node> root);
 
 #endif //LEPAI_CONVERTERS_H

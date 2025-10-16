@@ -19,9 +19,9 @@ public:
 
     std::vector<token> convert_to_prefix(const std::vector<token>& tokens);
 
-    std::unique_ptr<Node> generate_parse_tree(const token& tok);
+    std::shared_ptr<Node> generate_parse_tree(const token& tok);
 
-    std::unique_ptr<Node> parse_pipeline(const std::string& str);
+    std::shared_ptr<Node> parse_pipeline(const std::string& str);
 
     token& next();
 };

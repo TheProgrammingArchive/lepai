@@ -68,23 +68,23 @@ token& FxParser::next() {
 }
 
 
-std::unique_ptr<Node> FxParser::generate_parse_tree(const token& tok) {
+std::shared_ptr<Node> FxParser::generate_parse_tree(const token& tok) {
     if (!tok.atom.empty()) {
-        return std::make_unique<AtomNode>(tok.atom);
+        return std::make_shared<AtomNode>(tok.atom);
     }
 
     if (tok.type == TOK_NOT) {
         auto right = generate_parse_tree(next());
-        return std::make_unique<OperatorNode>(std::unique_ptr<Node>(nullptr), tok.type, std::move(right));
+        return std::make_shared<OperatorNode>(std::shared_ptr<Node>(nullptr), tok.type, std::move(right));
     }
 
     auto left = generate_parse_tree(next());
     auto right = generate_parse_tree(next());
 
-    return std::make_unique<OperatorNode>(std::move(left), tok.type, std::move(right));
+    return std::make_shared<OperatorNode>(std::move(left), tok.type, std::move(right));
 }
 
-std::unique_ptr<Node> FxParser::parse_pipeline(const std::string &str) {
+std::shared_ptr<Node> FxParser::parse_pipeline(const std::string &str) {
     std::vector<token> tokens = tokenize(str);
     convert_to_prefix(tokens);
 

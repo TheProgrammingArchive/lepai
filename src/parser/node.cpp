@@ -27,7 +27,7 @@ std::string print_enum(int t) {
 }
 
 // OperatorNode
-OperatorNode::OperatorNode(std::unique_ptr<Node> left, tok_type type, std::unique_ptr<Node> right) : left {std::move(left)}, right {std::move(right)}, type {type}{
+OperatorNode::OperatorNode(std::shared_ptr<Node> left, tok_type type, std::shared_ptr<Node> right) : left {std::move(left)}, right {std::move(right)}, type {type}{
 }
 
 OperatorNode::~OperatorNode(){

@@ -76,6 +76,4 @@ int main() {
     auto newr = cnf_pipeline(std::move(root));
 
     print_infix(*newr);
-    //
-    // mem_clean(root);
 }
