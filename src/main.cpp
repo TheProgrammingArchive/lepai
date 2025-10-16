@@ -75,5 +75,5 @@ int main() {
 
     auto newr = cnf_pipeline((root));
 
-    print_infix(*root.get());
+    print_infix(*newr.get());
 }

@@ -30,18 +30,12 @@ std::string print_enum(int t) {
 OperatorNode::OperatorNode(std::shared_ptr<Node> left, tok_type type, std::shared_ptr<Node> right) : left {std::move(left)}, right {std::move(right)}, type {type}{
 }
 
-OperatorNode::~OperatorNode(){
-    // delete left;
-    // delete right;
-}
-
-std::ostream& OperatorNode::print(std::ostream &out) const {
+std::string OperatorNode::print() const {
     if (left.get() == nullptr)
-        out << print_enum(type) << " " << *right.get();
-    else
-        out << *left.get() << " " << print_enum(type) << " " << *right.get();
+        return  print_enum(type) + " " + right.get()->print();
 
-    return out;
+    return left.get()->print() + " " + print_enum(type) + " " + right.get()->print();
+
 }
 
 bool OperatorNode::is_operator() const {
@@ -52,10 +46,10 @@ bool OperatorNode::is_operator() const {
 AtomNode::AtomNode(const std::string& atom) : atom {atom}{ // NOLINT(*-pass-by-value)
 }
 
-std::ostream& AtomNode::print(std::ostream &out) const{
-    out << "Atom(" << atom << ")";
-    return out;
+std::string AtomNode::print() const {
+    return atom;
 }
+
 
 bool AtomNode::is_operator() const {
     return false;

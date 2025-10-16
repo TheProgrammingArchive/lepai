@@ -44,10 +44,16 @@ int compute_height(Node* root) {
 }
 
 void print_infix(const Node& root) {
-    std::cout << root;
+    std::cout << root.print();
 }
 
 bool validity_check(Node* root) {
+    std::string linear = root->print();
 
+    bool is_valid = true;
+
+    
+
+    return is_valid;
 }
 
