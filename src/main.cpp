@@ -60,20 +60,23 @@ public:
 int main() {
     FxParser p{};
 
-    auto root = (p.parse_pipeline("p > ~(r * (p + ~q + ~(z > e))"));
+    auto root = (p.parse_pipeline("p > q * r"));
 
-    Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}};
-
-    try {
-        std::cout << evaluator.evaluate(root.get()) << std::endl;
-    }
-    catch (const std::runtime_error& e) {
-        std::cout << e.what() << std::endl;;
-    }
-
-    std::cout << compute_height(root.get());
-
-    auto newr = cnf_pipeline((root));
-
-    print_infix(*newr.get());
+    //Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}};
+    //
+    // try {
+    //     std::cout << evaluator.evaluate(root.get()) << std::endl;
+    // }
+    // catch (const std::runtime_error& e) {
+    //     std::cout << e.what() << std::endl;;
+    // }
+    //
+    // std::cout << compute_height(root.get()) << std::endl;;
+    //
+    // auto newr = cnf_pipeline((root));
+    //
+    // std::cout << std::get<2>(validity_check(*newr)) << std::endl;
+    //
+    // print_infix(*newr.get());
+    print_truth_table(root.get(), {"p", "q", "r"});
 }

@@ -5,10 +5,11 @@
 
 #include <format>
 #include <iostream>
+#include <regex>
 
 // Evaluator
 Evaluator::Evaluator(const std::unordered_map<std::string, bool>& env_map) : env_map{env_map}{};
-Evaluator::Evaluator(std::unordered_map<std::string, bool> &&env_map) : env_map{std::move(env_map)}{};
+Evaluator::Evaluator(std::unordered_map<std::string, bool>&& env_map) : env_map{std::move(env_map)}{};
 
 
 bool Evaluator::evaluate(const Node *node) const {
@@ -47,13 +48,76 @@ void print_infix(const Node& root) {
     std::cout << root.print();
 }
 
-bool validity_check(Node* root) {
-    std::string linear = root->print();
+std::tuple<int, int, int> validity_check(const Node& root) {
+    std::string linear = root.print();
+    linear = std::regex_replace(linear, std::regex(" "), "");
+    std::stringstream ss{linear};
+    std::string item;
+
+    std::vector<std::string> clauses = {};
+
+    while (std::getline(ss, item, '*')) {
+        if (!item.empty())
+            clauses.push_back(item);
+    }
 
     bool is_valid = true;
+    int valid_clauses = 0, invalid_clauses = 0;
 
-    
+    for (const auto& clause : clauses) {
+        std::stringstream css{clause};
+        std::unordered_map<std::string, bool> atoms = {};
 
-    return is_valid;
+        while (std::getline(css, item, '+')) {
+            if (!item.empty()) {
+                atoms[item] = true;
+            }
+        }
+
+        for (const auto& p : atoms) {
+            if (p.first[0] == '~' && !atoms[p.first.substr(1)]) {
+                is_valid = false;
+                invalid_clauses += 1;
+                break;
+            }
+            if (p.first[0] != '~' && !atoms['~' + p.first]) {
+                is_valid = false;
+                invalid_clauses += 1;
+                break;
+            }
+        }
+    }
+
+    valid_clauses = clauses.size() - invalid_clauses;
+
+    return {is_valid, valid_clauses, invalid_clauses};
 }
+
+void print_truth_table(const Node* root, const std::vector<std::string>& templ) {
+    for (const auto& atom : templ)
+        std::cout << atom << "\t";
+    std::cout << "F" << std::endl;
+    for (int mask = 0; mask < (1 << templ.size()); mask++) {
+        std::unordered_map<std::string, bool> env_map;
+
+        for (int j = templ.size() - 1; j >= 0; j--) {
+            if (mask & (1 << j))
+                env_map[templ[j]] = true;
+            else
+                env_map[templ[j]] = false;
+
+            std::cout << env_map[templ[j]] << "\t";
+        }
+
+        Evaluator eval {env_map};
+        try{
+            std::cout << eval.evaluate(root) << std::endl;
+        }
+        catch (const std::runtime_error& e) {
+            std::cout << "Missing atom";
+            break;
+        }
+    }
+}
+
 

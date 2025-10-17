@@ -22,6 +22,8 @@ int compute_height(Node* root);
 
 void print_infix(const Node& root);
 
-bool validity_check(Node* root);
+std::tuple<int, int, int> validity_check(const Node& root);
+
+void print_truth_table(const Node* root, const std::vector<std::string>& templ);
 
 #endif //LEPAI_UTILS_H
