@@ -20,7 +20,7 @@ int get_precedence(tok_type ty) {
     return 0;
 }
 
-FxParser::FxParser() : position{0};
+FxParser::FxParser() : position{0}{};
 
 
 std::vector<token> FxParser::convert_to_prefix(const std::vector<token> &tokens) {
