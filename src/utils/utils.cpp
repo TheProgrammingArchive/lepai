@@ -6,10 +6,20 @@
 #include <format>
 #include <iostream>
 #include <regex>
+///@file
 
 // Evaluator
-Evaluator::Evaluator(const std::unordered_map<std::string, bool>& env_map) : env_map{env_map}{};
-Evaluator::Evaluator(std::unordered_map<std::string, bool>&& env_map) : env_map{std::move(env_map)}{};
+Evaluator::Evaluator(const std::unordered_map<std::string, bool>& env_map) : env_map{env_map}, parse_tree{nullptr}{};
+Evaluator::Evaluator(std::unordered_map<std::string, bool>&& env_map) : env_map{std::move(env_map)}, parse_tree{nullptr}{};
+Evaluator::Evaluator(const Node *parse_tree) : parse_tree{parse_tree}, env_map{{}}{};
+
+bool Evaluator::evaluate(const std::unordered_map<std::string, bool>& env_map) {
+    if (this->parse_tree == nullptr)
+        throw std::runtime_error("Missing propositional logic statement to evalutate over");
+
+    this->env_map = env_map;
+    return evaluate(this->parse_tree);
+}
 
 
 bool Evaluator::evaluate(const Node *node) const {
@@ -25,11 +35,11 @@ bool Evaluator::evaluate(const Node *node) const {
 
     const OperatorNode *op_node = dynamic_cast<const OperatorNode *>(node);
     if (op_node->type == TOK_AND)
-        return evaluate(op_node->left.get()) && evaluate(op_node->right.get());
+        return evaluate(op_node->left.get()) & evaluate(op_node->right.get());
     if (op_node->type == TOK_OR)
-        return evaluate(op_node->left.get()) || evaluate(op_node->right.get());
+        return evaluate(op_node->left.get()) | evaluate(op_node->right.get());
     if (op_node->type == TOK_IMPL)
-        return !evaluate(op_node->left.get()) || evaluate(op_node->right.get());
+        return !evaluate(op_node->left.get()) | evaluate(op_node->right.get());
     return !evaluate(op_node->right.get());
 }
 
@@ -94,6 +104,7 @@ std::tuple<int, int, int> validity_check(const Node& root) {
 }
 
 void print_truth_table(const Node* root, const std::vector<std::string>& templ) {
+    Evaluator eval {root};
     for (const auto& atom : templ)
         std::cout << atom << "\t";
     std::cout << "F" << std::endl;
@@ -109,9 +120,8 @@ void print_truth_table(const Node* root, const std::vector<std::string>& templ) 
             std::cout << env_map[templ[j]] << "\t";
         }
 
-        Evaluator eval {env_map};
         try{
-            std::cout << eval.evaluate(root) << std::endl;
+            std::cout << eval.evaluate(env_map) << std::endl;
         }
         catch (const std::runtime_error& e) {
             std::cout << "Missing atom";

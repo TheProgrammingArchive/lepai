@@ -5,6 +5,8 @@
 #include <iostream>
 #include <unistd.h>
 
+///@file
+
 std::string print_enum(int t) {
     switch (t) {
         case 0:

@@ -7,6 +7,11 @@
 #include <string>
 #include <vector>
 
+///@file
+
+/**
+ * enum representing different tokens that a propositional logic statement is broken down into
+ */
 enum tok_type {
     TOK_AND,
     TOK_OR,
@@ -18,11 +23,20 @@ enum tok_type {
     TOK_RPAREN
 };
 
+/**
+ * struct representing a singular token
+ * @note atom is an empty string for operator tokens
+ */
 struct token {
     tok_type type;
     std::string atom;
 };
 
+/**
+ * Tokenizes a propositional logic statement
+ * @param logical_expr propositional logic statement as a string
+ * @return vector of tokens
+ */
 std::vector<token> tokenize(const std::string& logical_expr);
 
 #endif //LEPAI_TOKENIZER_H

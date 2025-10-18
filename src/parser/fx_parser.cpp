@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <ranges>
 
+///@file
 
 int get_precedence(tok_type ty) {
     if (ty == TOK_NOT)

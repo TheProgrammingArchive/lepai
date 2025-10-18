@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include <regex>
+///@file
 
 std::vector<token> tokenize(const std::string &logical_expr) {
     std::string l_expr = std::regex_replace(logical_expr, std::regex("\\("), "( ");
