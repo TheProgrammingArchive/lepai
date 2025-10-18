@@ -8,6 +8,7 @@
 
 #include "node.h"
 #include "include/tokenizer/tokenizer.h"
+///@file
 
 /**
  * struct representing the parser, converts the propositional logic statement from infix to prefix and then generates a parse tree
