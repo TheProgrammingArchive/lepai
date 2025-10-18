@@ -12,7 +12,7 @@
 ///@file
 
 /**
- * Internal representation of Node in memory, contains purely virtual methods that are overriden by specific node types
+ * @brief Internal representation of Node in memory, contains purely virtual methods that are overriden by specific node types
  */
 struct Node {
     virtual ~Node() = default;
@@ -25,7 +25,7 @@ struct Node {
 };
 
 /**
- * struct representing OperatorNode, holds strong references to both its left and right nodes
+ * @brief struct representing OperatorNode, holds strong references to both its left and right nodes
  */
 struct OperatorNode : Node {
     std::shared_ptr<Node> left;
@@ -46,7 +46,7 @@ struct OperatorNode : Node {
 };
 
 /**
- * struct representing AtomNode, holds the atom string
+ * @brief struct representing AtomNode, holds the atom string
  */
 struct AtomNode : Node {
     std::string atom;

@@ -11,7 +11,7 @@
 ///@file
 
 /**
- * struct representing the parser, converts the propositional logic statement from infix to prefix and then generates a parse tree
+ * @brief struct representing the parser, converts the propositional logic statement from infix to prefix and then generates a parse tree
  */
 class FxParser {
 private:

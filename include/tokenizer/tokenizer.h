@@ -10,7 +10,7 @@
 ///@file
 
 /**
- * enum representing different tokens that a propositional logic statement is broken down into
+ * @brief enum representing different tokens that a propositional logic statement is broken down into
  */
 enum tok_type {
     TOK_AND,
@@ -24,7 +24,7 @@ enum tok_type {
 };
 
 /**
- * struct representing a singular token
+ * @brief struct representing a singular token
  * @note atom is an empty string for operator tokens
  */
 struct token {
