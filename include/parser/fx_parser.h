@@ -38,7 +38,7 @@ public:
     /**
      * parameterless constructor for FxParser
      */
-    FxParser() : position{0}{};
+    FxParser();
     /**
      * Takes in a propositional logic statement as a string and returns a pointer to the root of its parse tree
      * @param str propositional logic statement as a string
