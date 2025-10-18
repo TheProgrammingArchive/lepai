@@ -37,12 +37,36 @@ struct Evaluator {
     bool evaluate(const std::unordered_map<std::string, bool>& env_map);
 };
 
+/**
+ * Returns the height of a parse tree
+ * @param root pointer to root of parse tree
+ * @return height of parse tree
+ */
 int compute_height(Node* root);
 
+/**
+ * Prints parse tree back in infix form
+ * @param root Pointer to root of parse tree
+ */
 void print_infix(const Node& root);
 
+/**
+ * Determines whether a propositional statement in CNF is valid or not, number of invalid and valid statements respectively
+ * @param root reference to root of parse tree
+ * @return tuple with first element being whether the statement is valid or not, second element is the number of valid statements,
+ * third the number of invalid statements
+ */
 std::tuple<int, int, int> validity_check(const Node& root);
 
+/**
+ * Prints the truth table of a propositional logic statment
+ * @param root pointer to root of parse tree
+ * @param templ vector of all propositional atoms
+ */
 void print_truth_table(const Node* root, const std::vector<std::string>& templ);
+//void print_truth_table(const Node *root, const std::vector<std::string> &templ)
+//void print_truth_table(const Node *root, const std::vector<std::string> &templ)
+
+
 
 #endif //LEPAI_UTILS_H
