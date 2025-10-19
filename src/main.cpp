@@ -7,60 +7,10 @@
 #include "include/utils/converters.h"
 #include "include/utils/utils.h"
 
-class Test {
-public:
-    int x;
-
-    Test(Test&& mv_test)  noexcept : x {mv_test.x} {
-        std::cout << "moving";
-    };
-    Test(const Test& t) : x {t.x} {
-        std::cout << "copy constructor";
-    }
-    Test(int x) : x {x} {
-        std::cout << "Regular";
-    }
-};
-
-class Handler {
-private:
-    Test t;
-
-public:
-    Handler(Test&& t) : t {(t)} {
-
-    }
-
-    void doSomething() {
-        this->t.x += 3;
-    }
-};
-
-// std::string print_enum(int t) {
-//     switch (t) {
-//         case 0:
-//             return "TOK_AND";
-//         case 1:
-//             return "TOK_OR";
-//         case 2:
-//             return "TOK_IMPL";
-//         case 3:
-//             return "TOK_NOT";
-//         case 4:
-//             return "";
-//         case 5:
-//             return "TOK_LPAREN";
-//         case 6:
-//             return "TOK_RPAREN";
-//         default:
-//             return "";
-//     }
-// }
-
 int main() {
     FxParser p{};
 
-    auto root = (p.parse_pipeline("(p + ~q) * (r + q) * (~p + ~r)"));
+    auto root = (p.parse_pipeline("(1 + ~1) * (2 + 3) * (~3 + ~4)"));
 
     Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}};
     //
@@ -73,9 +23,9 @@ int main() {
     //
     std::cout << compute_height(root.get()) << std::endl;
     //
-    auto newr = cnf_pipeline((root));
+    auto newr = cnf_pipeline(root);
 
-    std::cout << "KJASDF" << std::get<1>(validity_check(*newr)) << std::endl;
+    // std::cout << "KJASDF" << std::get<1>(validity_check(*newr)) << std::endl;
 
     print_infix(*newr.get());
     print_truth_table(root.get(), {"p", "q", "r"});
