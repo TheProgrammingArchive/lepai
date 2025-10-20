@@ -1,7 +1,6 @@
 /**
  * @file cnfsat2002.cpp
  * @brief CNF (Conjunctive Normal Form) SAT formula validator
- * @author K Vikashh Adaikalavan
  * @date 2025
  * 
  * This program reads CNF formulas from a file and validates them by checking
@@ -32,6 +31,7 @@ using namespace std::chrono;
  * 
  * @param filepath Path to the CNF file in DIMACS format
  * @return int Number of valid clauses found, or -1 if file cannot be opened
+ * @author K Vikashh Adaikalavan
  * 
  * @note The CNF file should follow DIMACS format:
  *       - Header line: p cnf <num_variables> <num_clauses>
@@ -112,6 +112,7 @@ int cnf_validcno(string filepath)
  * @brief Counts the number of non-valid (non-tautology) clauses in a CNF formula
  * 
  * Calculates the difference between total clauses and valid clauses.
+ * @author K Vikashh Adaikalavan
  * 
  * @param filepath Path to the CNF file in DIMACS format
  * @return int Number of non-valid clauses, or -1 if file cannot be opened
@@ -152,7 +153,8 @@ int cnf_non_valid_cno(string filepath)
 
 /**
  * @brief Checks if all clauses in a CNF formula are valid (tautologies)
- * 
+ *
+ * @author K Vikashh Adaikalavan
  * A CNF formula is considered "valid" in this context if all of its clauses
  * are tautologies (each contains both a literal and its negation).
  * 
