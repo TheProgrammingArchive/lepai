@@ -59,7 +59,7 @@ void print_infix(const Node& root);
 std::tuple<int, int, int> validity_check(const Node& root);
 
 /**
- * Prints the truth table of a propositional logic statment
+ * Prints the truth table of a propositional logic statement
  * @param root pointer to root of parse tree
  * @param templ vector of all propositional atoms
  */

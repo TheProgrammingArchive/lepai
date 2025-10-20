@@ -10,7 +10,7 @@
 int main() {
     FxParser p{};
 
-    auto root = (p.parse_pipeline("(1 + ~1) * (2 + 3) * (~3 + ~4)"));
+   auto root = (p.parse_pipeline("1 + -1 * 2 + -2"));
 
     Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}};
     //
