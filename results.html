@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CNF Parser Benchmark Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even){background-color: #f2f2f2;}
+        .memory {
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CNF Parser Benchmark Report</h1>
+
+<h2>Parse Times & Memory Usage</h2>
+
+<table>
+    <tr>
+        <th>File</th>
+        <th>Parse Tree Time (ms)</th>
+        <th>Height Calculation (ns)</th>
+        <th>Evaluation Time (ns)</th>
+        <th>Validation Time (ms)</th>
+        <th>Memory Usage (bytes) [Average of 5 random files] </th>
+    </tr>
+    <!-- Gen1 -->
+    <tr><td>gen-1.1</td><td>38.42</td><td>170800.36</td><td>659597.33</td><td>2.71</td><td class="memory">2,711,111</td></tr>
+    <tr><td>gen-1.2</td><td>63.60</td><td>287277.56</td><td>1,012,837.78</td><td>4.71</td><td class="memory">4,711,111</td></tr>
+    <tr><td>gen-1.3</td><td>72.07</td><td>326639.42</td><td>1,135,260.53</td><td>5.47</td><td class="memory">5,466,667</td></tr>
+    <tr><td>gen-1.4</td><td>75.71</td><td>337733.27</td><td>1,183,687.69</td><td>5.69</td><td class="memory">5,688,889</td></tr>
+    <tr><td>gen-1.5</td><td>75.36</td><td>341842.47</td><td>1,189,626.24</td><td>5.91</td><td class="memory">5,911,111</td></tr>
+    <tr><td>gen-1.6</td><td>76.27</td><td>357009.91</td><td>1,221,259.09</td><td>6.02</td><td class="memory">6,022,222</td></tr>
+    <tr><td>gen-1.7</td><td>80.27</td><td>366057.24</td><td>1,263,168.98</td><td>6.16</td><td class="memory">6,155,556</td></tr>
+    <tr><td>gen-1.8</td><td>90.16</td><td>432070.62</td><td>1,501,721.13</td><td>7.31</td><td class="memory">7,311,111</td></tr>
+    <tr><td>gen-1.9</td><td>113.80</td><td>518675.00</td><td>1,765,677.42</td><td>9.42</td><td class="memory">9,422,222</td></tr>
+    <!-- Gen3 -->
+    <tr><td>gen-3.1</td><td>92.11</td><td>419833.42</td><td>1,492,913.49</td><td>7.27</td><td class="memory">9,780,450</td></tr>
+    <!-- Gen4 -->
+    <tr><td>gen-4.1</td><td>83.96</td><td>386075.60</td><td>1,327,399.56</td><td>6.64</td><td class="memory">8,725,200</td></tr>
+    <!-- Gen8 -->
+    <tr><td>gen-8.1</td><td>64.18</td><td>282746.53</td><td>1,004,706.73</td><td>4.69</td><td class="memory">4,200,160</td></tr>
+    <!-- Gen10 -->
+    <tr><td>gen-10.1</td><td>62.23</td><td>288404.77</td><td>968,267.54</td><td>4.80</td><td class="memory">7,400,150</td></tr>
+</table>
+
+<h2>Some Observations</h2>
+<ul>
+    <li>File names have the pattern <code>v[NUMBER]</code>.</li>
+    <li>The smaller the number, the shallower the parse tree and hence lower memory usage.</li>
+    <li>Parse tree generation time correlates roughly with tree height.</li>
+    <li>Memory usage ranges from 4.2 MB to 9.78 MB across all tested files.</li>
+</ul>
+
+<h2> Notes </h2>
+<ul>
+    <li><p>Memory safety was ensured by sticking to smart pointers from the beginning, tested thoroughly using valgrind </p></li>
+    <li> Although using raw pointers would've resulted in lesser memory usage, it poses a risk of leaking memory, especially in functions like DNF, where the entire node itself is modified.
+        Ownership is clearer and easier to manage using smart pointers
+    </li>
+</ul>
+
+<h2 style="text-align: left"> <a href="html/index.html"> DOCUMENTATION </a> </h2>
+<h3 style="text-align: left"> Doxygen docs must be generated </h3>
+
+</body>
+</html>
