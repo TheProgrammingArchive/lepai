@@ -18,7 +18,7 @@ add_executable(lepai src/main.cpp
         src/utils/converters.cpp
 )
 
-add_executable(cnfchk src/cnfsat2002.cpp
+add_executable(cnfchk src/benchmark.cpp
         include/tokenizer/tokenizer.h
         src/tokenizer/tokenizer.cpp
         include/parser/node.h
