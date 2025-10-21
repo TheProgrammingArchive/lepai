@@ -32,11 +32,16 @@ std::string print_enum(int t) {
 OperatorNode::OperatorNode(std::shared_ptr<Node> left, tok_type type, std::shared_ptr<Node> right) : left {std::move(left)}, right {std::move(right)}, type {type}{
 }
 
-std::string OperatorNode::print() const {
-    if (left.get() == nullptr)
-        return  print_enum(type) + " " + right.get()->print();
+std::string OperatorNode::print(bool without_braces) const {
+    if (left == nullptr) {
+        if (without_braces)
+            return  print_enum(type) + " " + right.get()->print(without_braces);
+        return "(" + print_enum(type) + " " + right.get()->print(without_braces) + ")";
+    }
 
-    return left.get()->print() + " " + print_enum(type) + " " + right.get()->print();
+    if (without_braces)
+        return left.get()->print(without_braces) + " " + print_enum(type) + " " + right.get()->print(without_braces);
+    return "(" + left.get()->print(without_braces) + " " + print_enum(type) + " " + right.get()->print(without_braces) + ")";
 
 }
 
@@ -48,8 +53,10 @@ bool OperatorNode::is_operator() const {
 AtomNode::AtomNode(const std::string& atom) : atom {atom}{ // NOLINT(*-pass-by-value)
 }
 
-std::string AtomNode::print() const {
-    return atom;
+std::string AtomNode::print(bool without_braces) const {
+    if (without_braces)
+        return atom;
+    return "(" + atom + ")";
 }
 
 

@@ -219,14 +219,12 @@ std::pair<std::string, int> cnfToString(const std::string& filename) {
     std::string token;
     while (file >> token) {
         if (token == "c") {
-            // skip rest of the comment line
             std::string rest;
             std::getline(file, rest);
             continue;
         }
 
         if (token == "p") {
-            // header: p cnf <vars> <clauses>
             std::string format;
             int vars = 0;
             int clausesCount = 0;
@@ -241,7 +239,6 @@ std::pair<std::string, int> cnfToString(const std::string& filename) {
             continue;
         }
 
-        // token should be a literal (decimal integer), attempt to parse
         try {
             int lit = std::stoi(token);
             if (lit == 0) {
@@ -253,18 +250,14 @@ std::pair<std::string, int> cnfToString(const std::string& filename) {
                 currentClause.push_back(lit);
             }
         } catch (const std::exception& e) {
-            // if a non-integer token sneaks in, skip it but warn (optional)
             std::cerr << "Warning: skipping non-integer token '" << token << "'\n";
-            // continue parsing
         }
     }
 
-    // If file ended without final 0, close the last clause
     if (!currentClause.empty()) {
         clauses.push_back(std::move(currentClause));
     }
 
-    // Build the output string using ~ for negation
     std::ostringstream out;
     for (size_t i = 0; i < clauses.size(); ++i) {
         out << "(";

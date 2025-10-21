@@ -25,8 +25,9 @@ int main() {
     //
     auto newr = cnf_pipeline(root);
 
-    // std::cout << "KJASDF" << std::get<1>(validity_check(*newr)) << std::endl;
+    validity_check(*newr);
 
     print_infix(*newr.get());
+    std::cout << std::endl;
     print_truth_table(root.get(), {"p", "q", "r"});
 }

@@ -55,11 +55,11 @@ int compute_height(Node* root) {
 }
 
 void print_infix(const Node& root) {
-    std::cout << root.print();
+    std::cout << root.print(false);
 }
 
 std::tuple<int, int, int> validity_check(const Node& root) {
-    std::string linear = root.print();
+    std::string linear = root.print(true);
     linear = std::regex_replace(linear, std::regex(" "), "");
     std::stringstream ss{linear};
     std::string item;

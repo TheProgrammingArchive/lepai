@@ -18,7 +18,7 @@ struct Node {
     virtual ~Node() = default;
 
     /** Recursively print parse tree */
-    virtual std::string print() const = 0;
+    virtual std::string print(bool without_braces) const = 0;
 
     /** Returns whether the node object is an operator or an atom */
     virtual bool is_operator() const = 0;
@@ -40,7 +40,7 @@ struct OperatorNode : Node {
      */
     OperatorNode(std::shared_ptr<Node> left = nullptr, tok_type type = {}, std::shared_ptr<Node> right = nullptr);
 
-    std::string print() const override;
+    std::string print(bool without_braces) const override;
 
     bool is_operator() const override;
 };
@@ -57,7 +57,7 @@ struct AtomNode : Node {
      */
     AtomNode(const std::string& atom);
 
-    std::string print() const override;
+    std::string print(bool without_braces) const override;
 
     bool is_operator() const override;
 };

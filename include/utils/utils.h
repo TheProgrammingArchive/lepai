@@ -64,9 +64,5 @@ std::tuple<int, int, int> validity_check(const Node& root);
  * @param templ vector of all propositional atoms
  */
 void print_truth_table(const Node* root, const std::vector<std::string>& templ);
-//void print_truth_table(const Node *root, const std::vector<std::string> &templ)
-//void print_truth_table(const Node *root, const std::vector<std::string> &templ)
-
-
 
 #endif //LEPAI_UTILS_H
