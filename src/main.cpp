@@ -7,14 +7,14 @@
 #include "include/utils/converters.h"
 #include "include/utils/utils.h"
 
-int main() {
+int main(int argc, char** argv) {
     FxParser p{};
 
-    std::string str = ""; // Provide propositional logic statement here
+    std::string str = "(p > q)"; // Provide propositional logic statement here
 
-   auto root = (p.parse_pipeline(str));
+    auto root = (p.parse_pipeline(str));
 
-    Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}}; // Edit truth value of atoms here
+    Evaluator evaluator {{{"p", true}, {"q", false}, {"r", true}}}; // Edit truth value of atoms here
 
     try {
         std::cout << evaluator.evaluate(root.get()) << std::endl;
@@ -31,5 +31,5 @@ int main() {
 
     print_infix(*newr.get());
     std::cout << std::endl;
-    print_truth_table(root.get(), {"p", "q", "r"});
+    print_truth_table(root.get(), {"p", "q"});
 }
