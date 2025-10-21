@@ -10,17 +10,19 @@
 int main() {
     FxParser p{};
 
-   auto root = (p.parse_pipeline("1 + -1 * 2 + -2"));
+    std::string str = ""; // Provide propositional logic statement here
 
-    Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}};
-    //
-    // try {
-    //     std::cout << evaluator.evaluate(root.get()) << std::endl;
-    // }
-    // catch (const std::runtime_error& e) {
-    //     std::cout << e.what() << std::endl;;
-    // }
-    //
+   auto root = (p.parse_pipeline(str));
+
+    Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}}; // Edit truth value of atoms here
+
+    try {
+        std::cout << evaluator.evaluate(root.get()) << std::endl;
+    }
+    catch (const std::runtime_error& e) {
+        std::cout << e.what() << std::endl;;
+    }
+
     std::cout << compute_height(root.get()) << std::endl;
     //
     auto newr = cnf_pipeline(root);
