@@ -14,12 +14,12 @@ int main() {
 
     Evaluator evaluator {{{"p", false}, {"q", true}, {"r", true}}};
     //
-    try {
-        std::cout << evaluator.evaluate(root.get()) << std::endl;
-    }
-    catch (const std::runtime_error& e) {
-        std::cout << e.what() << std::endl;;
-    }
+    // try {
+    //     std::cout << evaluator.evaluate(root.get()) << std::endl;
+    // }
+    // catch (const std::runtime_error& e) {
+    //     std::cout << e.what() << std::endl;;
+    // }
     //
     std::cout << compute_height(root.get()) << std::endl;
     //
