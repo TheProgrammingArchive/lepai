@@ -1,11 +1,10 @@
-# ParseTree-Generator-and-CNF-validity-checker
+# Logical expression parser and interpreter
 
-CodeBase to generate parse trees of propositional formulas and validate CNF forms.
-
-## Overview
-This project generates parse tree for a given logic formula .It also constructs and validates CNF expressions from the generated parse trees using algorithms like IMP_FREE, NNF, DISTR, CNF.
+Generate parse trees of propositional logic statements and perform various operations on the tree.
 
 ## Features
-- Parse tree generation for propositional logic formulas
-- Formula truth calculation for a given input and evaluating truth table for the given formula
-- CNF conversion and validity checking
+* Generate parse tree from propositional logic statement
+* Calculate height of the tree
+* Evaluate the tree on a truth value set
+* Generate truth table
+* Convert the statement to CNF
