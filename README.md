@@ -1,6 +1,6 @@
 # Logical expression parser and interpreter
 
-Generate parse trees of propositional logic statements and perform various operations on the tree.
+Generate parse trees of propositional logic statements using the shunting-yard algorithm and perform various operations on the tree.
 
 ## Features
 * Generate parse tree from propositional logic statement
